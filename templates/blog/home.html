@@ -2,16 +2,39 @@
 {% load static %}
 
 {% block container %}
- <div class="col-sm-8">
-    <h2 class="text-center">Total Blog List</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad architecto deserunt dolorem exercitationem facilis fuga id non odio tempore, voluptas. Autem, est ex id pariatur qui velit! Atque corporis dolore ducimus eum harum incidunt iusto nemo nulla quaerat tempora, voluptate voluptatum? Accusamus, aperiam dicta enim expedita hic ipsum nulla repellat.</p>
+
+
+ <div class="col-sm-8 my-4">
+ <a class="mb-2 btn btn-success" href="{% url 'create' %}">Add New Post</a>
+    {% if post_list %}
+        <form action="" method="post">
+        {% csrf_token %}
+            {% for post in post_list %}
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.description | truncatewords:20 }} <a class="btn-sm btn btn-warning" href="{% url 'post' post.id %}">Read More</a></p>
+            {% endfor %}
+
+        </form>
+        {% else %}
+        <h2 class="text-center text-warning my-4">Not Available Post</h2>
+    {% endif %}
  </div>
 
- <div class="col-sm-4">
+ <div class="col-sm-4 my-4">
     <h2 class="text-center">Recent Post</h2>
-    <h6>Post One</h6>
-    <h6>Post Two</h6>
-    <h6>Post Three</h6>
-    <h6>Post Four</h6>
+     <hr>
+
+    {% if post_list %}
+        <form action="" method="post">
+        {% csrf_token %}
+            {% for post in post_list %}
+                <h5 class="text-center"><a class="text-white" href="{% url 'post' post.id %}">{{ post.title }}</a></h5>
+            {% endfor %}
+
+        </form>
+        {% else %}
+        <h2 class="text-center text-warning my-4">Not Available Post</h2>
+    {% endif %}
+
  </div>
 {% endblock %}

@@ -17,7 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from blog import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    # path('', views.home, name='home'),
+    path('', views.PostListView.as_view(), name='home'),
+    path('create/', views.PostCreateView.as_view(), name='create'),
+    path('post/<int:pk>/', views.PostDetailView.as_view(), name='post'),
+    path('success/', views.PostSuccessMessageView.as_view(), name='success'),
 ]
+
