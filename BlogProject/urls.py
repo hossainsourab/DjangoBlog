@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog import views
-
+from django.contrib.auth import views as auth_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +25,14 @@ urlpatterns = [
     path('create/', views.PostCreateView.as_view(), name='create'),
     path('post/<int:pk>/', views.PostDetailView.as_view(), name='post'),
     path('success/', views.PostSuccessMessageView.as_view(), name='success'),
-]
+    path('dashboard/', views.PostDashboardView.as_view(), name='dashboard'),
+    path('update/<int:pk>/', views.PostUpdateView.as_view(), name='update'),
+    path('contact/', views.Contact.as_view(), name='contact'),
+    path('delete/<int:pk>/', views.PostDeleteView.as_view(), name='delete'),
 
+    # Start Custom Authentication User
+
+
+    # End Custom Authentication User
+
+]
